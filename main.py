@@ -13,12 +13,14 @@ screen.bgcolor("black")
 screen.tracer(0)
 
 is_game_on = True
-user_paddle = Paddle(START_X, START_Y)
-comp_paddle = Paddle(-START_X, START_Y)
+right_paddle = Paddle(START_X, START_Y)
+left_paddle = Paddle(-START_X, START_Y)
 
 screen.listen()
-screen.onkeypress(user_paddle.move_up, "Up")
-screen.onkeypress(user_paddle.move_down, "Down")
+screen.onkeypress(right_paddle.move_up, "Up")
+screen.onkeypress(right_paddle.move_down, "Down")
+screen.onkeypress(left_paddle.move_up, "w")
+screen.onkeypress(left_paddle.move_down, "s")
 
 while is_game_on:
     screen.update()

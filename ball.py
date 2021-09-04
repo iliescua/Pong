@@ -33,15 +33,23 @@ class Ball:
             self.x_move *= -1
 
 
-    def reset_ball(self):
+    def reset_ball_right(self):
         self.ball.goto(0,0)
-        self.x_move *= -1
+        if self.x_move < 0:
+            self.x_move *= -1
+
+    
+    def reset_ball_left(self):
+        self.ball.goto(0,0)
+        if self.x_move > 0:
+            self.x_move *= -1
+
 
     def update_score(self):
         if  self.ball.xcor() > 380:
-            self.r_score += 1
-            self.reset_ball()
+            self.l_score += 1
+            self.reset_ball_right()
 
         if  self.ball.xcor() < -380:
-            self.l_score += 1
-            self.reset_ball()
+            self.r_score += 1
+            self.reset_ball_left()

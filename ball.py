@@ -2,6 +2,9 @@ from turtle import Turtle, left
 import random as rand
 
 TOP_BORDER = 280
+SIDE_BORDER = 380
+P_SIZE = 50
+P_POSITION = 320
 
 class Ball:
 
@@ -26,30 +29,38 @@ class Ball:
         if self.ball.ycor() > TOP_BORDER or self.ball.ycor() < -TOP_BORDER:
             self.y_move *= -1
 
-        check_right = self.ball.distance(r_pad) < 50 and self.ball.xcor() > 320
-        check_left = self.ball.distance(l_pad) < 50 and self.ball.xcor() < -320
+        check_right = self.ball.distance(r_pad) < P_SIZE and self.ball.xcor() > P_POSITION
+        check_left = self.ball.distance(l_pad) < P_SIZE and self.ball.xcor() < -P_POSITION
 
         if check_right or check_left:
             self.x_move *= -1
 
 
     def reset_ball_right(self):
-        self.ball.goto(0,0)
+        self.ball.goto(0, 0)
         if self.x_move < 0:
             self.x_move *= -1
 
     
     def reset_ball_left(self):
-        self.ball.goto(0,0)
+        self.ball.goto(0, 0)
         if self.x_move > 0:
             self.x_move *= -1
 
 
     def update_score(self):
-        if  self.ball.xcor() > 380:
+        if  self.ball.xcor() > SIDE_BORDER:
             self.l_score += 1
             self.reset_ball_right()
 
-        if  self.ball.xcor() < -380:
+        if  self.ball.xcor() < -SIDE_BORDER:
             self.r_score += 1
             self.reset_ball_left()
+
+    
+    def get_r_score(self):
+        return self.r_score
+
+
+    def get_l_score(self):
+        return self.l_score

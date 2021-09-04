@@ -1,6 +1,7 @@
 from turtle import Screen
 from paddle import Paddle
 from ball import Ball
+from scoreboard import Scoreboard
 import time
 
 WIDTH = 800
@@ -19,6 +20,7 @@ is_game_on = True
 r_pad = Paddle(START_X, START_Y)
 l_pad = Paddle(-START_X, START_Y)
 ball = Ball()
+sb = Scoreboard()
 
 screen.listen()
 screen.onkeypress(r_pad.move_up, "Up")
@@ -34,7 +36,9 @@ while is_game_on:
     # Detect collision with top border or paddles
     ball.bounce(r_pad.pad_position(), l_pad.pad_position())
 
-    # Check for score updates
+    # Check for score updates and write score
     ball.update_score()
+    sb.write_score(ball.get_r_score(), ball.get_l_score())
+
 
 screen.exitonclick()

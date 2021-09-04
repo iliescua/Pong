@@ -30,7 +30,7 @@ screen.onkeypress(l_pad.move_down, "s")
 
 while is_game_on:
     screen.update()
-    time.sleep(SLEEP_TIME)
+    time.sleep(ball.ball_speed)
     ball.move()
 
     # Detect collision with top border or paddles

@@ -1,10 +1,13 @@
 from turtle import Screen
 from paddle import Paddle
+from ball import Ball
+import time
 
 WIDTH = 800
 HEIGHT = 600
 START_X = 350
 START_Y = 0
+SLEEP_TIME = 0.1
 
 screen = Screen()
 screen.title("Pong")
@@ -13,16 +16,25 @@ screen.bgcolor("black")
 screen.tracer(0)
 
 is_game_on = True
-right_paddle = Paddle(START_X, START_Y)
-left_paddle = Paddle(-START_X, START_Y)
+r_pad = Paddle(START_X, START_Y)
+l_pad = Paddle(-START_X, START_Y)
+ball = Ball()
 
 screen.listen()
-screen.onkeypress(right_paddle.move_up, "Up")
-screen.onkeypress(right_paddle.move_down, "Down")
-screen.onkeypress(left_paddle.move_up, "w")
-screen.onkeypress(left_paddle.move_down, "s")
+screen.onkeypress(r_pad.move_up, "Up")
+screen.onkeypress(r_pad.move_down, "Down")
+screen.onkeypress(l_pad.move_up, "w")
+screen.onkeypress(l_pad.move_down, "s")
 
 while is_game_on:
     screen.update()
+    time.sleep(SLEEP_TIME)
+    ball.move()
+
+    # Detect collision with top border or paddles
+    ball.bounce(r_pad.pad_position(), l_pad.pad_position())
+
+    # Check for score updates
+    ball.update_score()
 
 screen.exitonclick()
